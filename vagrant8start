@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Setup yakuake
+# Do a sudo ls or something like this to set the password after execute script
+
+if [ $1 = "help" ]
+then
+  echo "Do a sudo ls or something like this to set the password after execute script"
+  echo " "
+  echo "vgstart projectdir    -Prepare rsync tab, vagrant tab with docroot project, and codebase tab in docroot directory"
+  echo "vgstart nop           -Same that previous but it does not change to the docroot directory"
+else
+
+  # vagrant rsync tab.
+  # qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.addSession
+  qdbus org.kde.yakuake /yakuake/tabs setTabTitle 0 "rsync"
+  # Open Netbeans
+  # qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 0 "/usr/local/netbeans-8.2/bin/netbeans &"
+  # Open google chrome
+  # qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 0 "/usr/bin/google-chrome &"
+  # Open slack
+  # qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 0 "/usr/bin/slack &"
+
+  qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 0 "cd ~/vagrant/debian8"
+  qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 0 "clear"
+  qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 0 "vagrant up && vagrant rsync-auto"
+
+  # vagrant vagrant tab.
+  qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.addSession
+  qdbus org.kde.yakuake /yakuake/tabs setTabTitle 1 "vg"
+  qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 1 "cd ~/vagrant/debian8/ && clear"
+  qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 1 "sleep 30"
+  qdbus org.kde.yakuake /yakuake/sessions runCommand "ssh-add -k"
+  qdbus org.kde.yakuake /yakuake/sessions runCommand "ssh -A vagrant@192.168.10.10"
+
+  if [ $1 != "nop" ]
+  then
+      qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 1 "sleep 1 && cd $1-local/codebase/docroot/"
+  fi
+
+  # git codebase tab.
+  qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.addSession
+  qdbus org.kde.yakuake /yakuake/tabs setTabTitle 2 "cb"
+  if [ $1 != "nop" ]
+  then
+    qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd ~/vagrant/debian8/projects/codebases/$1-local/codebase/docroot/ && clear"
+  else
+    qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd ~/vagrant/debian8/projects/codebases && clear"
+  fi
+
+fi
