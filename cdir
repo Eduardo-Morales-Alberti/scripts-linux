@@ -34,7 +34,7 @@ if [ $1 = "p" ]
 then
   # qdbus org.kde.yakuake /yakuake/sessions addSession
   # dbus org.kde.yakuake /yakuake/tabs setTabTitle "cb"
-  qdbus org.kde.yakuake /yakuake/sessions runCommand "cd ~/vagrant/debian8/projects/codebases/$2-local/codebase/docroot/$3"
+  qdbus org.kde.yakuake /yakuake/sessions runCommand "cd ~/vagrant/debian8/projects/codebases/$2/codebase/docroot/$3"
   # cd ~/vagrant/debian8/projects/codebases/$2-local/codebase/docroot/$3
 fi
 
