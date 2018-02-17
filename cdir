@@ -13,7 +13,7 @@ fi
 # Going into vagrant
 if [ $1 = "vg" ]
 then
-  #qdbus org.kde.yakuake /yakuake/sessions addSession
+  qdbus org.kde.yakuake /yakuake/sessions addSession
   # dbus org.kde.yakuake /yakuake/tabs setTabTitle "vg"
   qdbus org.kde.yakuake /yakuake/sessions runCommand "cd ~/vagrant/debian8"
   qdbus org.kde.yakuake /yakuake/sessions runCommand "ssh-add -k"
@@ -25,14 +25,14 @@ then
   # Going to the docroot
   if [ "x$2" != "x$y" ]
   then
-    qdbus org.kde.yakuake /yakuake/sessions runCommand "cd $2-local/codebase/docroot/$3 && clear"
+    qdbus org.kde.yakuake /yakuake/sessions runCommand "cd $2/codebase/docroot/$3 && clear"
   fi
 fi
 
 # Going main directory of project
 if [ $1 = "p" ]
 then
-  # qdbus org.kde.yakuake /yakuake/sessions addSession
+  qdbus org.kde.yakuake /yakuake/sessions addSession
   # dbus org.kde.yakuake /yakuake/tabs setTabTitle "cb"
   qdbus org.kde.yakuake /yakuake/sessions runCommand "cd ~/vagrant/debian8/projects/codebases/$2/codebase/docroot/$3"
   # cd ~/vagrant/debian8/projects/codebases/$2-local/codebase/docroot/$3
@@ -41,7 +41,7 @@ fi
 # Going main directory of project
 if [ $1 = "vgup" ]
 then
-  # qdbus org.kde.yakuake /yakuake/sessions addSession
+  qdbus org.kde.yakuake /yakuake/sessions addSession
   # dbus org.kde.yakuake /yakuake/tabs setTabTitle "rsync"
   qdbus org.kde.yakuake /yakuake/sessions runCommand "cd vagrant/debian8 && vagrant up && vagrant rsync-auto"
   # cd ~/vagrant/debian8 && vagrant up && vagrant rsync-auto
