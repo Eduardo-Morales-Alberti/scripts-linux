@@ -23,6 +23,6 @@ You can change it using the command `'chmod u+x'`.
 ```
   Do a sudo ls or something like this to set the password after execute script
 
-  vgstart projectdir    -Prepare rsync tab, vagrant tab with docroot project, and codebase tab in docroot directory
-  vgstart nop           -Same that previous but it does not change to the docroot directory
+  vgstart projectdir [projectdirvagrant] -Prepare rsync tab, vagrant tab with docroot project, and codebase tab in docroot directory
+  vgstart nop                            -Same that previous but it does not change to the docroot directory
 ```

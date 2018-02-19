@@ -2,13 +2,14 @@
 
 # Setup yakuake
 # Do a sudo ls or something like this to set the password after execute script
+vgdir=" "
 
 if [ $1 = "help" ]
 then
   echo "Do a sudo ls or something like this to set the password after execute script"
   echo " "
-  echo "vgstart projectdir    -Prepare rsync tab, vagrant tab with docroot project, and codebase tab in docroot directory"
-  echo "vgstart nop           -Same that previous but it does not change to the docroot directory"
+  echo "vgstart projectdir [projectdirvg]    -Prepare rsync tab, vagrant tab with docroot project, and codebase tab in docroot directory"
+  echo "vgstart nop                          -Same that previous but it does not change to the docroot directory"
 else
 
   # vagrant rsync tab.
@@ -33,9 +34,16 @@ else
   qdbus org.kde.yakuake /yakuake/sessions runCommand "ssh-add -k"
   qdbus org.kde.yakuake /yakuake/sessions runCommand "ssh -A vagrant@192.168.10.10"
 
+  if [ "x$2" != "x$y" ]
+  then
+    vgdir+="$2"
+  else
+    vgdir+="$1"
+  fi
+
   if [ $1 != "nop" ]
   then
-      qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 1 "sleep 1 && cd $1/codebase/docroot/"
+      qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 1 "cd $vgdir/codebase/docroot/"
   fi
 
   # git codebase tab.
