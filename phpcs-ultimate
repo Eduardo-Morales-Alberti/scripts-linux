@@ -1,0 +1,3 @@
+phpcbf --standard=Drupal $1
+phpcs  --standard=DrupalPractice $1
+phpcs  --standard=Drupal $1
