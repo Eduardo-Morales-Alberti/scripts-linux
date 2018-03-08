@@ -1,3 +1,8 @@
-phpcbf --standard=Drupal $1
-phpcs  --standard=DrupalPractice $1
-phpcs  --standard=Drupal $1
+#!/bin/bash
+IN=$(git diff --name-only --staged --ignore-submodules)
+
+IN2=$(echo ${IN/"\n"/' '})
+
+phpcbf --standard=Drupal $IN2
+phpcs  --standard=DrupalPractice $IN2
+phpcs  --standard=Drupal $IN2
