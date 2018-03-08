@@ -51,7 +51,8 @@ else
   qdbus org.kde.yakuake /yakuake/tabs setTabTitle 2 "cb"
   if [ $1 != "nop" ]
   then
-    qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd ~/vagrant/debian8/projects/codebases/$1/codebase/docroot/ && clear"
+    qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd ~/vagrant/debian8/projects/codebases/"
+    qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd $1/codebase/docroot/ && clear"
   else
     qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd ~/vagrant/debian8/projects/codebases && clear"
   fi
