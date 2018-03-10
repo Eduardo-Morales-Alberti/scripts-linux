@@ -1,0 +1,29 @@
+#!/bin/bash
+
+_automplete ()
+{
+  local cmd curb cur opts
+
+  # base dir
+  cdir=~/vagrant/debian8/projects/codebases/
+
+  # last arg so far
+  cur="${COMP_WORDS[COMP_CWORD]}"
+
+  # dirname-esque, but makes "xyz/" => "xyz/" not "."
+  curb=$(echo $cur | sed 's,[^/]*$,,')
+
+  # get list of directories (use commened out line for dirs and files)
+  # append '/' to directories
+  # cmd="find $git$curb -maxdepth 1 -type d -printf %p/\n , -type f -print "
+  cmd="find $cdir$curb -maxdepth 1 -type d -printf %p/\n "
+
+  # remove base dir from list and remove extra trailing /s
+  opts=$($cmd | sed s:$cdir:: | sed s://*$:/:)
+
+  # generate list of completions
+  COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+  return 0;
+}
+complete -o nospace -o filenames -F _automplete cdir
+complete -o nospace -o filenames -F _automplete vgstart

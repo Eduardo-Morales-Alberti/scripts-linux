@@ -1,8 +1,17 @@
 #!/bin/bash
-IN=$(git diff --name-only --staged --ignore-submodules)
+if [ "$1" = "help" ]
+then
+  echo "Use phpcs-ultimate before commit your Drupal Code."
+  echo "First add your files to the git stage."
+  echo "Then run the command phpcs-ultimate"
+else
 
-IN2=$(echo ${IN/"\n"/' '})
+  IN=$(git diff --name-only --staged --ignore-submodules)
 
-phpcbf --standard=Drupal $IN2
-phpcs  --standard=DrupalPractice $IN2
-phpcs  --standard=Drupal $IN2
+  IN2=$(echo ${IN/"\n"/' '})
+
+  phpcbf --standard=Drupal $IN2
+  phpcs  --standard=DrupalPractice $IN2
+  phpcs  --standard=Drupal $IN2
+
+fi
