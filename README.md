@@ -3,9 +3,9 @@
 ## Setup the scripts.
 
 1. The scripts files must have the right permissions.
-You can change it using the command `'chmod u+x'`.
+You can change it using the command `'chmod u+x'`
 
-2. Create the file if not exists `/home/youruser/.bash_aliases`.
+2. Create the file if not exists `/home/youruser/.bash_aliases`
 
 3. Then add the followings lines:
 ```
@@ -35,9 +35,7 @@ alias phpcs-ultimate="scriptsdirectory/phpcs-ultimate"
 ```
 
 ## phpcs-ultimate
-> Use phpcs-ultimate to check the coding standard to your projects.
-```
-  Use phpcs-ultimate before commit your Drupal Code.
-  First add your files to the git stage.
-  Then run the command phpcs-ultimate
-```
+> Use phpcs-ultimate to check the coding standard on your projects.
+>>  Use phpcs-ultimate before commit your Drupal Code.
+>>  First add your files to the git stage.
+>>  Then run the command phpcs-ultimate
