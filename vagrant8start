@@ -32,11 +32,11 @@ else
   # git codebase tab.
   qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.addSession
   qdbus org.kde.yakuake /yakuake/tabs setTabTitle 2 "cb"
+  qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd ~/vagrant/debian8/projects/codebases/"
   if [ "x$1" != "x$y" ]
   then
-    qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd ~/vagrant/debian8/projects/codebases/"
-    qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd $1 && clear"
+    qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd $1"
   fi
-  qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "cd ~/vagrant/debian8/projects/codebases && clear"
+  qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal 2 "clear"
 
 fi
