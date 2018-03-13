@@ -21,7 +21,7 @@ alias phpcs-ultimate="scriptsdirectory/phpcs-ultimate"
 ```
   cdir vg              -Going into vagrant is
   cdir projectdir vg   -Going to the directory in the vagrant
-  cdir projectdir  p   -Going to the docroot project
+  cdir projectdir      -Going to the docroot project
   cdir vgup            -Start the machine vagrant and rsync // Do a sudo ls or something like that to set the password after execute script
 ```
 
