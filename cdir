@@ -6,28 +6,37 @@ if [ "$1" = "help" ]
 then
   echo "cdir vg              -Going into vagrant is"
   echo "cdir projectdir vg   -Going to the directory in the vagrant"
-  echo "cdir projectdir  p   -Going to the docroot project"
+  echo "cdir projectdir      -Going to the docroot project"
   echo "cdir vgup            -Start the machine vagrant and rsync // Do a sudo ls or something like that to set the password after execute script"
 fi
 
 # Going into vagrant
-if [ "$2" = "vg" ]
+if [ "$1" = "vg" ]
 then
   qdbus org.kde.yakuake /yakuake/sessions runCommand "cd ~/vagrant/debian8"
   qdbus org.kde.yakuake /yakuake/sessions runCommand "ssh-add -k"
   qdbus org.kde.yakuake /yakuake/sessions runCommand "ssh -A vagrant@192.168.10.10"
 
-  # Going to the directory
-  if [ "x$1" != "x$y" ]
+else
+  if [ "$2" = "vg" ]
   then
-    qdbus org.kde.yakuake /yakuake/sessions runCommand "cd $1 && clear"
-  fi
-fi
+    qdbus org.kde.yakuake /yakuake/sessions runCommand "cd ~/vagrant/debian8"
+    qdbus org.kde.yakuake /yakuake/sessions runCommand "ssh-add -k"
+    qdbus org.kde.yakuake /yakuake/sessions runCommand "ssh -A vagrant@192.168.10.10"
 
-# Going main directory of project
-if [ "x$1" != "x$y" ]
-then
-  qdbus org.kde.yakuake /yakuake/sessions runCommand "cd ~/vagrant/debian8/projects/codebases/$1"
+    # Going to the directory
+    if [ "x$1" != "x$y" ]
+    then
+      qdbus org.kde.yakuake /yakuake/sessions runCommand "cd $1 && clear"
+    fi
+  else
+    # Going main directory of project
+    if [ "x$1" != "x$y" ]
+    then
+      qdbus org.kde.yakuake /yakuake/sessions runCommand "cd ~/vagrant/debian8/projects/codebases/"
+      qdbus org.kde.yakuake /yakuake/sessions runCommand "cd $1"
+    fi
+  fi
 fi
 
 # Going main directory of projects and run the vagrant virtual machine.
