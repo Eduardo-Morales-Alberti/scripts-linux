@@ -34,7 +34,7 @@ else
     if [ "x$1" != "x$y" ]
     then
       qdbus org.kde.yakuake /yakuake/sessions runCommand "cd ~/vagrant/debian8/projects/codebases/"
-      qdbus org.kde.yakuake /yakuake/sessions runCommand "cd $1"
+      qdbus org.kde.yakuake /yakuake/sessions runCommand "cd $1 && clear"
     fi
   fi
 fi
