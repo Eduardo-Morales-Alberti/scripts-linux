@@ -1,0 +1,6 @@
+#!/bin/bash
+DATE=`date '+%Y-%m-%d%H%M%S'`
+EMAIL="debug_$DATE@metadrop.net"
+echo "$EMAIL" | xclip -sel clip
+echo "$EMAIL - Copiado al portapapeles"
+
