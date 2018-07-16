@@ -12,5 +12,6 @@ if [ ! -z "$version" ]
 then
     string="${string}-${version}"
 fi
+diff=$(git diff)
 
-echo $string
+echo $diff >> "${string}.patch"
