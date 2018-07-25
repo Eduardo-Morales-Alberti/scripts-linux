@@ -27,3 +27,4 @@ _automplete ()
 }
 complete -o nospace -o filenames -F _automplete cdir
 complete -o nospace -o filenames -F _automplete vgstart
+complete -o nospace -o filenames -F _automplete cdvgproject
