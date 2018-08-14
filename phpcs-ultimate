@@ -3,6 +3,7 @@ if [ "$1" = "help" ]
 then
   echo "Use phpcs-ultimate before commit your Drupal Code."
   echo "First add your files to the git stage."
+  echo "Run command from git root"
   echo "Then run the command phpcs-ultimate"
   echo "You can use the param b branch_name (branch to compare) to pass coding standard to the modified files"
 elif [ "$1" = "b" ]
