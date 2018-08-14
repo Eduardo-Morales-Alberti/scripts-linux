@@ -3,7 +3,7 @@ read -p 'Module (Example: "example_module"): ' module
 read -p 'Short description (Example: "Fix error"): ' desc
 read -p 'Issue id: ' issue
 read -p 'comment number: ' cnumber
-read -p 'Drupal version [8.x, 7.x]: ' version
+read -p 'Drupal version [8.x, 7.x] (Optional): ' version
 # Version is optional.
 desc=$(echo "${desc}" | sed 's/[[:space:]]/_/g' | tr '[:upper:]' '[:lower:]')
 string="${module}-${desc}-${issue}-${cnumber}"
