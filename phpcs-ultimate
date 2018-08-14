@@ -4,6 +4,22 @@ then
   echo "Use phpcs-ultimate before commit your Drupal Code."
   echo "First add your files to the git stage."
   echo "Then run the command phpcs-ultimate"
+  echo "You can use the param b branch_name (branch to compare) to pass coding standard to the modified files"
+elif [ "$1" = "b" ]
+then
+
+  COMPARE_BRANCH=$(git symbolic-ref --short -q HEAD)
+  ORIGIN_BRANCH='dev'
+  if [ ! -z "$2" ]
+  then
+    ORIGIN_BRANCH=$2
+  fi
+  IN=$(git diff --name-only --ignore-submodules ${ORIGIN_BRANCH} ${COMPARE_BRANCH} | grep -v "modules/contrib")
+  IN2=$(echo ${IN/"\n"/' '})
+
+  phpcbf --standard=Drupal $IN2
+  phpcs  --standard=DrupalPractice $IN2
+  phpcs  --standard=Drupal $IN2
 else
 
   IN=$(git diff --name-only --staged --ignore-submodules)
