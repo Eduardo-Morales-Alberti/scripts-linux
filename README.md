@@ -39,3 +39,10 @@ alias phpcs-ultimate="scriptsdirectory/phpcs-ultimate"
 >>  Use phpcs-ultimate before commit your Drupal Code.
 >>  First add your files to the git stage.
 >>  Then run the command phpcs-ultimate
+
+## Git hooks
+> Use pre-commit to check your code before commit it.
+```
+  Create a symb link from pre-commit to the .git/hooks folder of your repository.
+  ln -sf "repository-dir_scripts-linux/pre-commit" "your_repository/.git/hooks/pre-commit"
+```
