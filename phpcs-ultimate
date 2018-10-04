@@ -15,7 +15,7 @@ then
   then
     ORIGIN_BRANCH=$2
   fi
-  IN=$(git diff --name-only --ignore-submodules ${ORIGIN_BRANCH} ${COMPARE_BRANCH} | grep -v -e "modules/contrib\|modules/features")
+  IN=$(git diff --name-only --ignore-submodules --diff-filter=ACM ${ORIGIN_BRANCH} ${COMPARE_BRANCH} | grep -v -e "modules/contrib\|modules/features")
   IN2=$(echo ${IN/"\n"/' '})
 
   phpcbf --standard=Drupal $IN2
