@@ -1,9 +1,89 @@
 #!/bin/bash
-read -p 'Module (Example: "example_module"): ' module
-read -p 'Short description (Example: "Fix error"): ' desc
-read -p 'Issue id: ' issue
-read -p 'comment number: ' cnumber
-read -p 'Drupal version [8.x, 7.x] (Optional): ' version
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+case $key in
+    -m|--module)
+    module="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -d|--description)
+    desc="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -i|--issue)
+    issue="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -cn|--cnumber)
+    cnumber="$2"
+    shift # past argument
+    shift # past valued
+    ;;
+    -v|--version)
+    version="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -o|--originbranch)
+    originbranch="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -cb|--comparebranch)
+    comparebranch="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    *)    # unknown option
+    POSITIONAL+=("$1") # save it in an array for later
+    shift # past argument
+    ;;
+esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+if [ -z ${originbranch+x} ]
+then
+  read -p 'Origin branch (can be empty)"): ' originbranch
+fi
+
+if [ -z ${comparebranch+x} ]
+then
+  read -p 'Compare branch (can be empty)"): ' comparebranch
+fi
+
+if [ -z ${module+x} ]
+then
+  read -p 'Module (Example: "example_module"): ' module
+fi
+
+if [ -z ${desc+x} ]
+then
+  read -p 'Short description (Example: "Fix error"): ' desc
+fi
+
+if [ -z ${issue+x} ]
+then
+  read -p 'Issue id: ' issue
+fi
+
+if [ -z ${cnumber+x} ]
+then
+  read -p 'comment number: ' cnumber
+fi
+
+if [ -z ${version+x} ]
+then
+  read -p 'Drupal version [8.x, 7.x] (Optional): ' version
+fi
+
 # Version is optional.
 desc=$(echo "${desc}" | sed 's/[[:space:]]/_/g' | tr '[:upper:]' '[:lower:]')
 string="${module}-${desc}-${issue}-${cnumber}"
@@ -13,4 +93,4 @@ then
     string="${string}-${version}"
 fi
 
-git diff > "${string}.patch"
+git diff $originbranch $comparebranch > "${string}.patch"
