@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$1" = "help" ]
+then
+  echo "generate-patch -m example_module -d 'description example' -i issuenumber -cn comment_number -v 8.x -o OriginBranch -cb CompareBranch"
+  exit
+fi
+
 POSITIONAL=()
 while [[ $# -gt 0 ]]
 do
