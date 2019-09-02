@@ -1,0 +1,11 @@
+#!/bin/bash
+echo "Limpiamos swap"
+## Limpeiza de swap
+swapoff -a && swapon -a
+echo "Finalizado swap"
+echo ""
+echo "Comienzo cache"
+## Limpieza de cache
+sync; echo 3 > /proc/sys/vm/drop_caches
+echo "Finalizado cache"
+
