@@ -12,6 +12,7 @@ You can change it using the command `'chmod u+x'`
 alias cdir="scriptsdirectory/cdir"
 alias vgstart="scriptsdirectory/vagrant8start"
 alias phpcs-ultimate="scriptsdirectory/phpcs-ultimate"
+alias divide_screen="php scriptsdirectory/monitors.php"
 ```
 
 4. Also add the following line: `source "scriptsdirectory/autocompleteFunctions"` at .bashrc file on your home directory.
