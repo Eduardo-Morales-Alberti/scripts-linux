@@ -4,10 +4,6 @@ if (php_sapi_name() != 'cli') {
   throw new Exception('This application must be run on the command line.');
 }
 
-// Definir el orden de los monitores, si hay un nuevo monitor, volver a pedir el orden, guardar el orden en un fichero json.
-// Añadir left o right según esté el portatil.
-// Definir cual es el monitor del portatil.
-
 /**
  * Divide screen function.
  **/
