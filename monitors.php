@@ -12,7 +12,7 @@ if (php_sapi_name() != 'cli') {
  * Divide screen function.
  **/
 function divide_screen($unify = FALSE, $left_postion = TRUE) {
-  $config_file = @file_get_contents("config_monitor.json");
+  $config_file = @file_get_contents(dirname(__FILE__). "/config_monitor.json");
 
   $monitors = json_decode($config_file, TRUE);
   if (empty($monitors)) {
@@ -52,29 +52,32 @@ function get_monitors_weights($save_file = TRUE) {
         $pieces = explode(' ', $value);
         return str_replace(array("\r", "\n"), '', array_pop($pieces));
     }, $monitors);
-    print "There are the following monitors:" . PHP_EOL;
-    print_r($monitors);
-    $count = (count($monitors)-1);
-    print "Set the weight by monitor with a number, from 0 to " . $count . ", please do not repeat numbers." . PHP_EOL;
-    $values = range(0, $count);
-    foreach ($monitors as $monitor) {
-        do {
-            $value = readline("Set the weight for " . $monitor . ' monitor: ');
-            print($value);
-        } while(!is_numeric($value) || !in_array($value, $values));
-        $key = array_search($value, $values);
-        unset($values[$key]);
-        $monitors_weight[$value] = $monitor;
-    }
-    ksort($monitors_weight);
     if ($save_file) {
-        $config_file = fopen("config_monitor.json", "w") or die("Unable to open file!");
+        print "There are the following monitors:" . PHP_EOL;
+        print_r($monitors);
+        $count = (count($monitors) - 1);
+        print "Set the weight by monitor with a number, from 0 to " . $count . ", please do not repeat numbers." . PHP_EOL;
+        $values = range(0, $count);
+        foreach ($monitors as $monitor) {
+            do {
+                $value = readline("Set the weight for " . $monitor . ' monitor: ');
+                print($value);
+            } while (!is_numeric($value) || !in_array($value, $values));
+            $key = array_search($value, $values);
+            unset($values[$key]);
+            $monitors_weight[$value] = $monitor;
+        }
+
+        ksort($monitors_weight);
+
+        $config_file = fopen(dirname(__FILE__). "/config_monitor.json", "w") or die("Unable to open file!");
         fwrite($config_file, json_encode($monitors_weight, JSON_PRETTY_PRINT));
         fclose($config_file);
+        $monitors = $monitors_weight;
     }
 
-    print_r($monitors_weight);
-    return $monitors_weight;
+    print_r($monitors);
+    return $monitors;
 }
 
 // -u To unify screens
