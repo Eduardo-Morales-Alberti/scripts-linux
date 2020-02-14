@@ -95,7 +95,7 @@ if ($set_weight) {
     get_monitors_weights();
 }
 
-if (in_array('help', $argv)) {
+if (in_array('-h', $argv)) {
   print "monitor.php -u ** To unify screens. By default main monitor to left, -r main monitor to right.\r\n";
   print "monitor.php -d ** To divide screens.\r\n";
   print "monitor.php -s ** Set weight positions monitors.\r\n";
