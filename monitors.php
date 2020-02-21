@@ -15,6 +15,7 @@ function divide_screen($unify = FALSE, $left_postion = TRUE) {
       $monitors = get_monitors_weights();
   }
   $command = "xrandr ";
+  $real_monitors = get_monitors_weights(FALSE);
 
   $initial_resolution = 0;
 
@@ -26,9 +27,11 @@ function divide_screen($unify = FALSE, $left_postion = TRUE) {
     }
   foreach ($monitors as $key => $monitor) {
 
-      print($monitor . PHP_EOL);
-      $command .= "--output " . $monitor . " --mode 1920x1080 --pos " . $initial_resolution . "x0 --rotate normal ";
-      $initial_resolution += $unify ? 0 : 1920;
+      if (in_array($monitor, $real_monitors)) {
+          print($monitor . PHP_EOL);
+          $command .= "--output " . $monitor . " --mode 1920x1080 --pos " . $initial_resolution . "x0 --rotate normal ";
+          $initial_resolution += $unify ? 0 : 1920;
+      }
 
   }
   return $command;
